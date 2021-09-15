@@ -4,7 +4,7 @@ import './App.css';
 
 const App = () => {
 
-
+const baseURL = 'https://restcountries.eu/rest/v2/'
 
 const [darkMode, setDarkMode] = useState(false)
 const [data, setData] = useState([])
@@ -14,8 +14,8 @@ const toggleCard = darkMode ? 'darkCard' : 'lightCard'
 const toggleHeader = darkMode ? 'darkHeader' : 'lightHeader'
 
 
-const getCountries = () => {
-  fetch('https://restcountries.eu/rest/v2/all')
+const getData = (query) => {
+  fetch(baseURL + query)
   .then(res => {
     // console.log(res.json())
     return res.json()
@@ -28,20 +28,20 @@ const getCountries = () => {
 }
 
 useEffect(() => {
-  getCountries()
-  // setData(recs)
+  getData('all')
+
 }, [])
 
 
-console.log(data)
+// console.log(data)
 
   return (
-    <div className={toggleTheme}>
+    <main className={toggleTheme}>
       <header className={toggleHeader}>
         <span>Where in the world?</span>
-        <span onClick={()=> setDarkMode(!darkMode)}>{
+        <button onClick={()=> setDarkMode(!darkMode)}>{
           darkMode ? 'Light Mode' : 'Dark Mode'
-        }</span>
+        }</button>
       </header>
 
 
@@ -73,7 +73,7 @@ console.log(data)
 
               </div>
         </main>
-    </div>
+    </main>
   );
 }
 

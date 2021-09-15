@@ -1,23 +1,39 @@
-import logo from './logo.svg';
+
 import './App.css';
 
-function App() {
+const App = () => {
+
+let recs = []
+
+for(let i = 0; i < 8; i++) {
+  recs.push(<div key={i} className='card'/>)
+}
+
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+      <header>
+        <span>Where in the world?</span>
+        <span>Dark Mode</span>
       </header>
+
+
+        <main className='countriesMain'>
+            <div className='searchBars'>
+                <div className='nameSearchBar'>
+                  Search for a country
+                </div>
+
+                <div className='filterRegionDiv'>
+                  Filter By Region
+                </div>
+            </div>
+            <div className='cardsContainer'>
+            {
+              recs.map(elem => {return elem} )
+            }
+            </div>
+        </main>
     </div>
   );
 }

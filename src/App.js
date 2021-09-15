@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import Card from './components/Card'
+import RegionFilter  from './components/RegionFilter'
 import './App.css';
 
 const App = () => {
@@ -17,23 +18,20 @@ const toggleHeader = darkMode ? 'darkHeader' : 'lightHeader'
 const getData = (query) => {
   fetch(baseURL + query)
   .then(res => {
-    // console.log(res.json())
     return res.json()
   })
   .then(json => {
-    // console.log(json)
     setData(json)
   })
   .catch(err => {console.error(err)})
 }
+
 
 useEffect(() => {
   getData('all')
 
 }, [])
 
-
-// console.log(data)
 
   return (
     <main className={toggleTheme}>
@@ -51,9 +49,8 @@ useEffect(() => {
                   Search for a country
                 </div>
 
-                <div className='filterRegionDiv'>
-                  Filter By Region
-                </div>
+                <RegionFilter data={data} getData={getData}/>
+
             </div>
               <div className='cardsContainer'>
               {

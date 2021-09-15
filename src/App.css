@@ -1,17 +1,53 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;600;800&display=swap');
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-header {
+:root {
+  font-family:  'Nunito Sans', sans-serif;
+    /* (Dark Mode Elements) */
+  --darkBlue: hsl(209, 23%, 22%);
+    /* (Dark Mode Background) */
+  --veryDarkBlue: hsl(207, 26%, 17%);
+    /* (Light Mode Text) */
+  --veryDarkBlueText: hsl(200, 15%, 8%);
+    /* (Light Mode Input) */
+  --darkGray: hsl(0, 0%, 52%);
+    /* (Light Mode Background) */
+  --veryLightGray: hsl(0, 0%, 98%);
+    /* (Dark Mode Text & Light Mode Elements) */
+  --white: hsl(0, 0%, 100%);
+}
+
+.lightMode {
+  background-color: var(--veryLightGray);
+  color: var(--veryDarkBlueText)
+}
+
+.darkMode {
+  background-color: var(--veryDarkBlue);
+  color: var(--white)
+}
+
+
+.lightHeader, .darkHeader {
   height: 5rem;
   padding-left: 2rem;
   padding-right: 2rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border: solid blue;
+}
+
+.lightHeader {
+  background-color: var(--white);
+}
+
+.darkHeader {
+  background-color: var(--darkBlue);
 }
 
 .searchBars {
@@ -22,6 +58,7 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+
 }
 
 .cardsContainer {
@@ -30,9 +67,29 @@ header {
   flex-wrap: wrap;
 }
 
-.card {
+.lightCard, .darkCard {
+  position: relative;
   margin: 1.5rem;
   width: 12rem;
   height: 20rem;
-  border: solid blue;
+  border-radius: .3rem;
+}
+
+.lightCard {
+  background-color: var(--white);
+}
+
+.darkCard {
+
+  background-color: var(--darkBlue);
+}
+.cardDiv {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+.countriesMain {
+  background: none;
 }

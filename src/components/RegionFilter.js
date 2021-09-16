@@ -7,8 +7,8 @@ return(
       <div className='regionInputBar'>Filter By Region<span onClick={() => console.log('drop down')}>v</span></div>
       <div className='regionsDropdown'>
         {
-          regions.map(region=> {
-            return <span onClick={() => props.getData(`region/${region}`)}>{region}</span>
+          regions.map((region, i) => {
+            return <span key={i + region} onClick={() => props.getData(`region/${region}`)}>{region}</span>
           })
         }
         <span onClick={() => props.getData('all')}>All</span>

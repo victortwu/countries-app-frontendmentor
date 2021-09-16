@@ -26,15 +26,6 @@ body {
   --white: hsl(0, 0%, 100%);
 }
 
-/* .lightMode,
-.darkMode {
-
-  height: 1000rem;
-
-
-
-
-} */
 
 .lightMode {
   background-color: var(--veryLightGray);

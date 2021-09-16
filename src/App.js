@@ -84,12 +84,7 @@ useEffect(() => {
               {
                 data.map((country, i) => {
                   return <Card
-                  flag={country.flag}
-                  name={country.name}
-                  population={country.population}
-                  region={country.region}
-                  capital={country.capital}
-                  id={i + country.numericCode}
+                  data={country}
                   toggleCard={toggleCard}
                   darkMode={darkMode}/>
                 })

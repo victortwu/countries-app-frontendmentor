@@ -55,17 +55,21 @@ const getData = (query) => {
   .catch(err => {console.error(err)})
 }
 
+const convertCountryCodes = (code) => {
+  console.log(countryCodesObj[`${code}`])
+}
+
 
 useEffect(() => {
   getData('all')
 
 }, [])
 
-
+console.log(countryCodesObj)
   return (
     <main className={toggleTheme}>
       <header className={toggleHeader}>
-        <span>Where in the world?</span>
+        <span onClick={()=> convertCountryCodes('AUS')}>Where in the world?</span>
         <button onClick={()=> setDarkMode(!darkMode)}>{
           darkMode ? 'Light Mode' : 'Dark Mode'
         }</button>
@@ -75,7 +79,12 @@ useEffect(() => {
         <main className='countriesMain'>
             <div className='searchBars'>
 
-                <CountrySearch countryNames={countryNames} getData={getData}/>
+                <CountrySearch
+                countryNames={countryNames}
+                getData={getData}
+
+
+                />
 
                 <RegionFilter data={data} getData={getData}/>
 
@@ -85,8 +94,10 @@ useEffect(() => {
                 data.map((country, i) => {
                   return <Card
                   data={country}
+                  countryCodesObj={countryCodesObj}
                   toggleCard={toggleCard}
-                  darkMode={darkMode}/>
+                  darkMode={darkMode}
+                  getData={getData}/>
                 })
               }
 

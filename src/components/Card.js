@@ -19,6 +19,17 @@ const getLanguages = () => {
   return props.data.languages.map(el => {return <li>{el.name}</li>})
 }
 
+const getBorderCountries = () => {
+  return props.data.borders.map(code => {
+    if (props.countryCodesObj[`${code}`]){
+        return <button onClick={()=> {
+          props.getData('name/' + props.countryCodesObj[`${code}`])
+          setShowModal(false)
+        }}>{props.countryCodesObj[`${code}`]}</button>
+    }
+  })
+}
+
   return(
     <>
     <div key={props.data.name} onClick={() => {
@@ -42,7 +53,7 @@ const getLanguages = () => {
       <div className='imgContainer'><img src={props.data.flag} alt='flag'/></div>
       <div className='modalStats'>
         <h2>{props.data.name}</h2>
-        <ul>
+        <ul className='leftUL'>
           <li><span style={bold600}>Native Name: </span>{props.data.nativeName}</li>
           <li><span style={bold600}>Population: </span>{props.data.population.toLocaleString('en-US')}</li>
           <li><span style={bold600}>Region: </span>{props.data.region}</li>
@@ -50,11 +61,15 @@ const getLanguages = () => {
           <li><span style={bold600}>Capital: </span>{props.data.capital}</li>
 
         </ul>
-        <ul>
+        <ul className='rightUL'>
           <li><span style={bold600}>Top Level Domain: </span>{getTopLevelDom()}</li>
           <li><span style={bold600}>Currencies: </span>{getCurrencies()}</li>
           <li><span style={bold600}>Languages: </span>{getLanguages()}</li>
         </ul>
+        <div className='borderCountries'>
+        <span style={bold600}>Border Countries: </span>
+        <ul>{getBorderCountries()}</ul>
+        </div>
 
       </div>
       </div>

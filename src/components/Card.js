@@ -8,21 +8,27 @@ const bold600 = {fontWeight: '600'}
 const toggleClass = showModal ? 'show' : 'hide'
 
 const getCurrencies = () => {
-  return props.data.currencies.map(el => {return <li>{el.name}</li>})
+  return props.data.currencies.map((el, i) => {
+    return <span>{el.name}{(i !== props.data.currencies.length - 1) ? ', ' : ''}</span>
+  })
 }
 
 const getTopLevelDom = () => {
-  return props.data.topLevelDomain.map(el => {return <li>{el}</li>})
+  return props.data.topLevelDomain.map((el, i) => {
+    return <span>{el}{(i !== props.data.topLevelDomain.length - 1) ? ', ' : ''}</span>
+  })
 }
 
 const getLanguages = () => {
-  return props.data.languages.map(el => {return <li>{el.name}</li>})
+  return props.data.languages.map((el, i) => {
+    return <span>{el.name}{(i !== props.data.languages.length - 1) ? ', ' : ''}</span>
+  })
 }
 
 const getBorderCountries = () => {
   return props.data.borders.map(code => {
     if (props.countryCodesObj[`${code}`]){
-        return <button onClick={()=> {
+        return <button className={`borderBtn ${props.toggleViewBtn}`} onClick={()=> {
           props.getData('name/' + props.countryCodesObj[`${code}`])
           setShowModal(false)
         }}>{props.countryCodesObj[`${code}`]}</button>
@@ -39,7 +45,7 @@ const getBorderCountries = () => {
       <div className='cardDiv'>
         <img src={props.data.flag} alt={props.data.name}/>
         <div className='cardContent'>
-            <h4>{props.data.name}</h4>
+            <h4 >{props.data.name}</h4>
             <p><span style={bold600}>Population: </span><span>{props.data.population.toLocaleString('en-US')}</span></p>
             <p><span style={bold600}>Region: </span><span>{props.data.region}</span></p>
             <p><span style={bold600}>Capital: </span><span>{props.data.capital}</span></p>
@@ -47,31 +53,48 @@ const getBorderCountries = () => {
         </div>
       </div>
     </div>
+
     <div className={toggleClass}>
-      <div className='viewCountry'>
-      <button onClick={()=> setShowModal(false)}>BACK</button>
-      <div className='imgContainer'><img src={props.data.flag} alt='flag'/></div>
-      <div className='modalStats'>
-        <h2>{props.data.name}</h2>
-        <ul className='leftUL'>
-          <li><span style={bold600}>Native Name: </span>{props.data.nativeName}</li>
-          <li><span style={bold600}>Population: </span>{props.data.population.toLocaleString('en-US')}</li>
-          <li><span style={bold600}>Region: </span>{props.data.region}</li>
-          <li><span style={bold600}>Sub Region: </span>{props.data.subregion}</li>
-          <li><span style={bold600}>Capital: </span>{props.data.capital}</li>
 
-        </ul>
-        <ul className='rightUL'>
-          <li><span style={bold600}>Top Level Domain: </span>{getTopLevelDom()}</li>
-          <li><span style={bold600}>Currencies: </span>{getCurrencies()}</li>
-          <li><span style={bold600}>Languages: </span>{getLanguages()}</li>
-        </ul>
-        <div className='borderCountries'>
-        <span style={bold600}>Border Countries: </span>
-        <ul>{getBorderCountries()}</ul>
-        </div>
+      <div className={props.toggleViewPage}>
+              <div className='btnContainer'>
+                  <button className={`backBtn ${props.toggleViewBtn}`} onClick={()=> setShowModal(false)}>Back</button>
+              </div>
 
-      </div>
+          <div className='viewContent'>
+
+                <div className='viewLeftCol'>
+
+                        <div className='imgContainer'><img src={props.data.flag} alt='flag'/></div>
+                </div>
+
+                <div className='viewRightCol'>
+
+                      <h3 className='viewTitle'>{props.data.name}</h3>
+
+                      <div className='leftUl'>
+                        <p><span style={bold600}>Native Name: </span>{props.data.nativeName}</p>
+                        <p><span style={bold600}>Population: </span>{props.data.population.toLocaleString('en-US')}</p>
+                        <p><span style={bold600}>Region: </span>{props.data.region}</p>
+                        <p><span style={bold600}>Sub Region: </span>{props.data.subregion}</p>
+                        <p><span style={bold600}>Capital: </span>{props.data.capital}</p>
+
+                      </div>
+
+                      <div className='rightUl'>
+                        <p><span style={bold600}>Top Level Domain: </span>{getTopLevelDom()}</p>
+                        <p><span style={bold600}>Currencies: </span>{getCurrencies()}</p>
+                        <p><span style={bold600}>Languages: </span><p>{getLanguages()}</p></p>
+                      </div>
+
+                      <div className='borderCountries'>
+                        <span style={bold600}>Border Countries: </span>
+                        {getBorderCountries()}
+                      </div>
+
+                </div>
+
+          </div>
       </div>
     </div>
     </>

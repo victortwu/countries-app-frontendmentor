@@ -26,6 +26,9 @@ body {
   --white: hsl(0, 0%, 100%);
 }
 
+.lightMode, .darkMode {
+  height: 100vh;
+}
 
 .lightMode {
   background-color: var(--veryLightGray);
@@ -105,7 +108,7 @@ body {
 
 .darkCard {
   background-color: var(--darkBlue);
-  box-shadow: 0 0 .2rem black;
+  box-shadow: 0 0 .2rem hsl(207, 26%, 10%);
 }
 
 .cardDiv {
@@ -132,29 +135,52 @@ body {
 }
 .countriesMain {
   background: none;
+  height: 100%;
 }
 
-.show { display: block }
+
+.show { background: none; }
 
 .hide { display: none }
 
-.viewCountry {
+.viewCountryCnt {
   position: absolute;
-  background-color: rgba(0,0,0,.7);
+
+  padding: 3rem;
   top: -5rem;
   left: 0;
-  width: 100vh;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: white;
+  width: 100%;
+  height: 100%;
+
   z-index: 1000;
+}
+
+.darkModeViewPage {
+  background-color: var(--veryDarkBlue);
+  color: var(--white)
+}
+
+.lightModeViewPage {
+  background-color: var(--veryLightGray);
+  color: var(--veryDarkBlueText)
+}
+
+.btnContainer {
+  width: 100%;
+  height: 5rem;
+}
+
+.viewContent {
+  width: 100%;
+  height: 30rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-areas: 'viewLeftCol viewRightCol';
 }
 
 .imgContainer {
   position: relative;
-  width: 40%;
+  width: 85%;
 
 }
 
@@ -165,6 +191,79 @@ body {
   width: 100%;
 }
 
+
+.viewLeftCol {
+  grid-area: viewLeftCol;
+  height: 50vh;
+
+}
+
+.viewRightCol {
+  grid-area: viewRightCol;
+  padding-top: 1.5rem;
+  padding-bottom: 5.5rem;
+  height: 50vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-auto-rows: auto;
+  grid-template-areas:
+          'viewTitle viewTitle'
+          'leftUl rightUl'
+
+          'borderCountries borderCountries';
+}
+
+.viewTitle {
+  grid-area: viewTitle;
+}
+
+.leftUl {
+  grid-area: leftUl;
+}
+
+.rightUl {
+  grid-area: rightUl;
+}
+
+.leftUl, .rightUl {
+  font-size: .7rem;
+}
+
+.borderCountries {
+  grid-area: borderCountries;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.borderBtn {
+  padding-left: .2rem;
+  padding-right: .2rem;
+  font-size: .7rem;
+}
+
+.backBtn {
+  width: 5rem;
+
+}
+
+.borderBtn,
+.backBtn {
+  height: 1.5rem;
+  border: none;
+  border-radius: .2rem;
+  color: inherit;
+}
+
+.lightBtn {
+  background-color: var(--white);
+  box-shadow: 0 0 .2rem gray;
+}
+
+.darkBtn {
+  background-color: var(--darkBlue);
+  box-shadow: 0 0 .2rem hsl(207, 26%, 10%);
+}
 
 @media screen and (max-width: 500px) {
   .searchBars {

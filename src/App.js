@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import Card from './components/Card'
 import RegionFilter  from './components/RegionFilter'
 import CountrySearch from './components/CountrySearch'
+import ViewPage from './components/ViewPage'
 import './App.css';
 
 const App = () => {
@@ -9,14 +10,17 @@ const App = () => {
 const baseURL = 'https://restcountries.eu/rest/v2/'
 
 const [darkMode, setDarkMode] = useState(false)
+
 const [countryCodesObj, setCountryCodesObj] = useState({})
 const [countryNames, setCountryNames] = useState([])
+
 const [data, setData] = useState([])
 
 const toggleTheme = darkMode ? 'darkMode' : 'lightMode'
 const toggleCard = darkMode ? 'darkCard' : 'lightCard'
 const toggleHeader = darkMode ? 'darkHeader' : 'lightHeader'
-
+const toggleViewPage = darkMode ? 'viewCountryCnt darkModeViewPage' : 'viewCountryCnt lightModeViewPage'
+const toggleViewBtn = darkMode ? 'darkBtn' : 'lightBtn'
 
 const getData = (query) => {
   let names
@@ -26,13 +30,6 @@ const getData = (query) => {
     return res.json()
   })
   .then(json => {
-    codeHash = json.reduce((country, curr) => ({
-      ...country, [curr.cioc]: curr.name
-    }), {})
-
-    names = json.map(country => {
-      return country.name
-    })
 
     setData(json)
 
@@ -55,9 +52,8 @@ const getData = (query) => {
   .catch(err => {console.error(err)})
 }
 
-const convertCountryCodes = (code) => {
-  console.log(countryCodesObj[`${code}`])
-}
+
+
 
 
 useEffect(() => {
@@ -65,11 +61,11 @@ useEffect(() => {
 
 }, [])
 
-console.log(countryCodesObj)
+
   return (
     <main className={toggleTheme}>
       <header className={toggleHeader}>
-        <span onClick={()=> convertCountryCodes('AUS')}>Where in the world?</span>
+        <span>Where in the world?</span>
         <button onClick={()=> setDarkMode(!darkMode)}>{
           darkMode ? 'Light Mode' : 'Dark Mode'
         }</button>
@@ -90,20 +86,23 @@ console.log(countryCodesObj)
 
             </div>
               <div className='cardsContainer'>
-              {
-                data.map((country, i) => {
-                  return <Card
-                  data={country}
-                  countryCodesObj={countryCodesObj}
-                  toggleCard={toggleCard}
-                  darkMode={darkMode}
-                  getData={getData}/>
-                })
-              }
-
-
+                  {
+                    data.map((country, i) => {
+                      return <Card
+                      data={country}
+                      countryCodesObj={countryCodesObj}
+                      toggleViewPage={toggleViewPage}
+                      toggleViewBtn={toggleViewBtn}
+                      toggleCard={toggleCard}
+                      darkMode={darkMode}
+                      getData={getData}
+                      />
+                    })
+                  }
               </div>
+
         </main>
+
     </main>
   );
 }

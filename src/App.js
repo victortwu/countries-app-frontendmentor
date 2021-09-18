@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import Card from './components/Card'
 import RegionFilter  from './components/RegionFilter'
 import CountrySearch from './components/CountrySearch'
-import ViewPage from './components/ViewPage'
+
 import './App.css';
 
 const App = () => {
@@ -76,13 +76,16 @@ useEffect(() => {
             <div className='searchBars'>
 
                 <CountrySearch
-                countryNames={countryNames}
-                getData={getData}
-
-
+                    countryNames={countryNames}
+                    getData={getData}
+                    darkMode={darkMode}
                 />
 
-                <RegionFilter data={data} getData={getData}/>
+                <RegionFilter
+                    data={data}
+                    getData={getData}
+                    darkMode={darkMode}
+                />
 
             </div>
               <div className='cardsContainer'>
@@ -102,7 +105,7 @@ useEffect(() => {
               </div>
 
         </main>
-
+        <footer></footer>
     </main>
   );
 }

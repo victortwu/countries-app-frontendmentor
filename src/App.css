@@ -1,15 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;600;800&display=swap');
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  position: relative;
-}
-
 :root {
   font-family:  'Nunito Sans', sans-serif;
     /* (Dark Mode Elements) */
@@ -26,8 +16,18 @@ body {
   --white: hsl(0, 0%, 100%);
 }
 
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  position: relative;
+}
+
 .lightMode, .darkMode {
-  height: 100vh;
+  height: 100%;
 }
 
 .lightMode {
@@ -39,6 +39,8 @@ body {
   background-color: var(--veryDarkBlue);
   color: var(--white)
 }
+
+/* ================== HEADER ===================== */
 
 
 .lightHeader, .darkHeader {
@@ -75,15 +77,96 @@ body {
   background-color: var(--darkBlue);
 }
 
+/* ======================= SUB HEADER ==================== */
+
 .searchBars {
+  position: relative;
   width: 100%;
   height: 5rem;
-  padding-left: 3rem;
-  padding-right: 3rem;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  z-index: 500;
+}
 
+/* ===================== SEARCH BAR ============================ */
+
+.nameSearchBar {
+  width: 33%;
+  height: 2.5rem;
+  display: flex;
+  align-items: center;
+  border-radius: .2rem;
+}
+
+.nameSearchBar > input {
+  height: 100%;
+  width: 85%;
+  border: none;
+  background: none;
+  font-family: inherit;
+
+}
+
+.searchDark {
+  background-color: var(--darkBlue);
+  box-shadow: 0 0 .2rem hsl(207, 26%, 10%);
+}
+
+.searchLight {
+  background-color: var(--white);
+  box-shadow: 0 0 .2rem gray;
+}
+
+/* ======================= REGION FILTER ========================== */
+
+.regionFilterContainer {
+  position: absolute;
+  right: 1.5rem;
+  width: 18%;
+}
+
+.regionInputBar {
+  width: 100%;
+  height: 2.5rem;
+  padding-left: .5rem;
+  padding-right: .5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: .8rem;
+  border-radius: .2rem;
+}
+
+.regionsDropdown {
+  position: absolute;
+  top: 3rem;
+  right: 0;
+  width: 100%;
+  padding: .5rem;
+  display: flex;
+  flex-direction: column;
+  font-size: .8rem;
+  border-radius: .2rem;
+  animation: quickDrop .1s ease-in;
+}
+
+.regionInputBar > span:hover,
+.regionsDropdown > span:hover {
+  cursor: pointer;
+  opacity: .7;
+}
+
+
+
+/* ======================= MAIN CONTENT ====================== */
+
+.countriesMain {
+  position: relative;
+  background: none;
+  height: 100%;
 }
 
 .cardsContainer {
@@ -93,12 +176,16 @@ body {
   flex-wrap: wrap;
 }
 
+
+/* ========================= CARD ============================== */
+
 .lightCard, .darkCard {
   position: relative;
   margin: 1.5rem;
   width: 12rem;
   height: 20rem;
   border-radius: .3rem;
+  transition: all .2s ease-in-out;
 }
 
 .lightCard {
@@ -131,13 +218,15 @@ body {
   width: 12rem;
   border-top-left-radius: .3rem;
   border-top-right-radius: .3rem;
-
-}
-.countriesMain {
-  background: none;
-  height: 100%;
 }
 
+.lightCard:hover,
+.darkCard:hover {
+  transform: scale(1.02);
+  cursor: pointer;
+}
+
+/* ============================ VIEW MODAL ========================= */
 
 .show { background: none; }
 
@@ -145,13 +234,12 @@ body {
 
 .viewCountryCnt {
   position: absolute;
-
   padding: 3rem;
   top: -5rem;
   left: 0;
   width: 100%;
-  height: 100%;
-
+  height: 1000px;
+  animation: fadeIn .2s;
   z-index: 1000;
 }
 
@@ -255,6 +343,13 @@ body {
   color: inherit;
 }
 
+.borderBtn:hover,
+.backBtn:hover {
+  cursor: pointer;
+  opacity: .8;
+  transition: .2s ease-in-out;
+}
+
 .lightBtn {
   background-color: var(--white);
   box-shadow: 0 0 .2rem gray;
@@ -263,6 +358,21 @@ body {
 .darkBtn {
   background-color: var(--darkBlue);
   box-shadow: 0 0 .2rem hsl(207, 26%, 10%);
+}
+
+footer {
+  width: 100%;
+  height: 600px;
+}
+
+@keyframes quickDrop {
+  0% {height: 0%; opacity: 0}
+  100% {height: 100%; opacity: 1}
+}
+
+@keyframes fadeIn {
+  0% {opacity: 0}
+  100% {opacity: 1}
 }
 
 @media screen and (max-width: 500px) {
@@ -287,5 +397,27 @@ body {
 
   .cardContent {
     margin-top: 3.5rem;
+  }
+
+  .viewLeftCol {
+    height: 12rem;
+  }
+
+  .viewContent {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+            'viewLeftCol'
+            'viewRightCol';
+  }
+
+  .viewRightCol {
+    grid-template-columns: 1fr;
+    grid-auto-rows: auto;
+    grid-template-areas:
+            'viewTitle'
+            'leftUl'
+            'rightUl'
+            'borderCountries';
+    grid-gap: 1rem
   }
 }

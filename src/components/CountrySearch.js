@@ -14,11 +14,12 @@ const inputRef = React.useRef()
       }, 3000)
     }
 
+const toggleClass = props.darkMode ? 'searchDark' : 'searchLight'
 
 return(
-    <div className='nameSearchBar'>
+    <div className={`nameSearchBar ${toggleClass}`}>
 
-    <input ref={inputRef} onChange={(e)=> handleChange(e)}list='countryNames' placeholder='Search gor a country...'/>
+    <input ref={inputRef} onChange={(e)=> handleChange(e)}list='countryNames' placeholder='Search for a country...'/>
       <datalist id='countryNames'>
         {
           props.countryNames.map((name, key) => {

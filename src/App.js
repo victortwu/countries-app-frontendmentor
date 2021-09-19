@@ -9,6 +9,7 @@ const App = () => {
 
 const baseURL = 'https://restcountries.eu/rest/v2/'
 
+
 const [darkMode, setDarkMode] = useState(false)
 
 const [countryCodesObj, setCountryCodesObj] = useState({})
@@ -21,6 +22,8 @@ const toggleCard = darkMode ? 'darkCard' : 'lightCard'
 const toggleHeader = darkMode ? 'darkHeader' : 'lightHeader'
 const toggleViewPage = darkMode ? 'viewCountryCnt darkModeViewPage' : 'viewCountryCnt lightModeViewPage'
 const toggleViewBtn = darkMode ? 'darkBtn' : 'lightBtn'
+
+
 
 const getData = (query) => {
   let names
@@ -65,7 +68,7 @@ useEffect(() => {
   return (
     <main className={toggleTheme}>
       <header className={toggleHeader}>
-        <span>Where in the world?</span>
+        <span onClick={()=> getData('all')}>Where in the world?</span>
         <button onClick={()=> setDarkMode(!darkMode)}>{
           darkMode ? 'Light Mode' : 'Dark Mode'
         }</button>
@@ -89,19 +92,22 @@ useEffect(() => {
 
             </div>
               <div className='cardsContainer'>
-                  {
-                    data.map((country, i) => {
-                      return <Card
-                      data={country}
-                      countryCodesObj={countryCodesObj}
-                      toggleViewPage={toggleViewPage}
-                      toggleViewBtn={toggleViewBtn}
-                      toggleCard={toggleCard}
-                      darkMode={darkMode}
-                      getData={getData}
-                      />
-                    })
-                  }
+
+                {
+                  data.map((country, i) => {
+                    return <Card
+                    data={country}
+                    countryCodesObj={countryCodesObj}
+                    toggleViewPage={toggleViewPage}
+                    toggleViewBtn={toggleViewBtn}
+                    toggleCard={toggleCard}
+                    darkMode={darkMode}
+                    getData={getData}
+                  />
+                  })
+                }
+
+
               </div>
 
         </main>

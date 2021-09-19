@@ -12,7 +12,7 @@ const toggleDropdown = dropdown ? 'show' : 'hide'
 
 return(
     <div className='regionFilterContainer'>
-      <div className={`regionInputBar ${toggleClass}` }>Filter By Region<span
+      <div className={`regionInputBar ${toggleClass}`}>Filter By Region<span
                   style={{fontWeight: '600'}}
                   onClick={() => setDropdown(!dropdown)}>{
                     dropdown ? '^' : 'v'

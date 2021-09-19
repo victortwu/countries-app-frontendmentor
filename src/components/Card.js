@@ -2,10 +2,12 @@ import React, { useState } from 'react'
 
 const Card = (props) => {
 
+
 const [showModal, setShowModal] = useState(false)
 
 const bold600 = {fontWeight: '600'}
-const toggleClass = showModal ? 'show' : 'hide'
+const toggleModalClass = showModal ? 'show' : 'hide'
+
 
 const getCurrencies = () => {
   return props.data.currencies.map((el, i) => {
@@ -38,10 +40,11 @@ const getBorderCountries = () => {
 
   return(
     <>
+
     <div key={props.data.name} onClick={() => {
                           setShowModal(true)
                           window.scrollTo(0,0)
-                        }} className={props.toggleCard}>
+                      }} className={props.toggleCard}>
       <div className='cardDiv'>
         <img src={props.data.flag} alt={props.data.name}/>
         <div className='cardContent'>
@@ -54,11 +57,16 @@ const getBorderCountries = () => {
       </div>
     </div>
 
-    <div className={toggleClass}>
+
+    <div className={toggleModalClass}>
 
       <div className={props.toggleViewPage}>
               <div className='btnContainer'>
-                  <button className={`backBtn ${props.toggleViewBtn}`} onClick={()=> setShowModal(false)}>Back</button>
+                  <button
+                      className={`backBtn ${props.toggleViewBtn}`}
+                      onClick={()=> setShowModal(false)}>
+                      Back
+                  </button>
               </div>
 
           <div className='viewContent'>

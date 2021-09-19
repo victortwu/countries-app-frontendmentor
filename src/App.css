@@ -98,7 +98,10 @@ body {
 .nameSearchBar {
   width: 33%;
   height: 2.5rem;
+  padding-left: .5rem;
+  padding-right: .5rem;
   display: flex;
+  justify-content: space-between;
   align-items: center;
   border-radius: .2rem;
 }

@@ -1,4 +1,6 @@
 import React from 'react'
+import { ReactComponent as SearchIcon } from '../assets/icons8-search.svg'
+
 
 const CountrySearch = (props) => {
 
@@ -18,7 +20,7 @@ const toggleClass = props.darkMode ? 'searchDark' : 'searchLight'
 
 return(
     <div className={`nameSearchBar ${toggleClass}`}>
-
+    <div className='searchIcon'><SearchIcon/></div>
     <input ref={inputRef} onChange={(e)=> handleChange(e)}list='countryNames' placeholder='Search for a country...'/>
       <datalist id='countryNames'>
         {

@@ -3,6 +3,7 @@ import Card from './components/Card'
 import RegionFilter  from './components/RegionFilter'
 import CountrySearch from './components/CountrySearch'
 
+
 import './App.css';
 
 const App = () => {
@@ -67,6 +68,7 @@ useEffect(() => {
 
   return (
     <main className={toggleTheme}>
+    
       <header className={toggleHeader}>
         <span onClick={()=> getData('all')}>Where in the world?</span>
         <button onClick={()=> setDarkMode(!darkMode)}>{

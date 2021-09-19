@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react'
 import Card from './components/Card'
 import RegionFilter  from './components/RegionFilter'
 import CountrySearch from './components/CountrySearch'
-
+import { ReactComponent as DarkIcon } from './assets/Darkmodeicon.svg'
+import { ReactComponent as LightIcon } from './assets/Lightmodeicon.svg'
 
 import './App.css';
 
@@ -57,9 +58,6 @@ const getData = (query) => {
 }
 
 
-
-
-
 useEffect(() => {
   getData('all')
 
@@ -68,12 +66,16 @@ useEffect(() => {
 
   return (
     <main className={toggleTheme}>
-    
+
       <header className={toggleHeader}>
         <span onClick={()=> getData('all')}>Where in the world?</span>
-        <button onClick={()=> setDarkMode(!darkMode)}>{
+
+        <div className='themeBtnCnt'>
+        <div className='iconDiv'>{darkMode ? <DarkIcon/> : <LightIcon/>}</div>
+        <button id='themeBtn' onClick={()=> setDarkMode(!darkMode)}>{
           darkMode ? 'Light Mode' : 'Dark Mode'
         }</button>
+        </div>
       </header>
 
 
@@ -97,7 +99,9 @@ useEffect(() => {
 
                 {
                   data.map((country, i) => {
+                    const key = i + country.name
                     return <Card
+                    key={key}
                     data={country}
                     countryCodesObj={countryCodesObj}
                     toggleViewPage={toggleViewPage}

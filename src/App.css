@@ -56,15 +56,22 @@ body {
   font-weight: 800;
 }
 
-.lightHeader > button,
-.darkHeader > button {
+.themeBtnCnt {
+  display: flex;
+}
+
+.iconDiv {
+  margin-top: .5em;
+  margin-right: .5em;
+}
+
+#themeBtn {
   background: none;
   border: none;
   color: inherit;
 }
 
-.lightHeader > button:hover,
-.darkHeader > button:hover,
+#themeBtn:hover,
 .lightHeader > span:hover,
 .darkHeader > span:hover {
   opacity: .8;
@@ -371,10 +378,14 @@ body {
   box-shadow: 0 0 .2rem hsl(207, 26%, 10%);
 }
 
+/* ============== FOOTER ============== */
+
 footer {
   width: 100%;
   height: 600px;
 }
+
+/* ================== OTHER STUFF ============== */
 
 @keyframes quickDrop {
   0% {transform: translateY(-3rem); opacity: 0}

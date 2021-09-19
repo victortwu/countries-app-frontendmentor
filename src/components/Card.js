@@ -39,9 +39,9 @@ const getBorderCountries = () => {
 }
 
   return(
-    <>
+    <div>
 
-    <div key={props.data.name} onClick={() => {
+    <div onClick={() => {
                           setShowModal(true)
                           window.scrollTo(0,0)
                       }} className={props.toggleCard}>
@@ -92,7 +92,7 @@ const getBorderCountries = () => {
                       <div className='rightUl'>
                         <p><span style={bold600}>Top Level Domain: </span>{getTopLevelDom()}</p>
                         <p><span style={bold600}>Currencies: </span>{getCurrencies()}</p>
-                        <p><span style={bold600}>Languages: </span><p>{getLanguages()}</p></p>
+                        <section><span style={bold600}>Languages: </span><p>{getLanguages()}</p></section>
                       </div>
 
                       <div className='borderCountries'>
@@ -105,7 +105,7 @@ const getBorderCountries = () => {
           </div>
       </div>
     </div>
-    </>
+    </div>
   )
 }
 

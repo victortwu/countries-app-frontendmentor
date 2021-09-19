@@ -99,9 +99,9 @@ useEffect(() => {
 
                 {
                   data.map((country, i) => {
-                    const key = i + country.name
+                    
                     return <Card
-                    key={key}
+                    key={i + country.name}
                     data={country}
                     countryCodesObj={countryCodesObj}
                     toggleViewPage={toggleViewPage}

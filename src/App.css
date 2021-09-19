@@ -287,16 +287,22 @@ body {
 .imgContainer {
   position: relative;
   width: 85%;
-
 }
 
-.imgContainer > img {
+.viewPageFlag {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
 }
 
+.darkFlagShadow {
+  box-shadow: 0 0 .2rem hsl(207, 26%, 10%);
+}
+
+.lightFlagShadow {
+  box-shadow: 0 0 .2rem gray
+}
 
 .viewLeftCol {
   grid-area: viewLeftCol;

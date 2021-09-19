@@ -4,42 +4,44 @@ const Card = (props) => {
 
 
 const [showModal, setShowModal] = useState(false)
-
+const boxShadow = props.darkMode ? 'darkFlagShadow' : 'lightFlagShadow'
 const bold600 = {fontWeight: '600'}
 const toggleModalClass = showModal ? 'show' : 'hide'
 
 
-const getCurrencies = () => {
-  return props.data.currencies.map((el, i) => {
-    return <span>{el.name}{(i !== props.data.currencies.length - 1) ? ', ' : ''}</span>
-  })
-}
-
-const getTopLevelDom = () => {
-  return props.data.topLevelDomain.map((el, i) => {
-    return <span>{el}{(i !== props.data.topLevelDomain.length - 1) ? ', ' : ''}</span>
-  })
-}
-
-const getLanguages = () => {
-  return props.data.languages.map((el, i) => {
-    return <span>{el.name}{(i !== props.data.languages.length - 1) ? ', ' : ''}</span>
-  })
-}
-
-const getBorderCountries = () => {
-  return props.data.borders.map(code => {
-    if (props.countryCodesObj[`${code}`]){
-        return <button className={`borderBtn ${props.toggleViewBtn}`} onClick={()=> {
-          props.getData('name/' + props.countryCodesObj[`${code}`])
-          setShowModal(false)
-        }}>{props.countryCodesObj[`${code}`]}</button>
+    const getCurrencies = () => {
+      return props.data.currencies.map((el, i) => {
+        return <span key={i+el.name}>{el.name}{(i !== props.data.currencies.length - 1) ? ', ' : ''}</span>
+      })
     }
-  })
-}
+
+    const getTopLevelDom = () => {
+      return props.data.topLevelDomain.map((el, i) => {
+        return <span key={i+el}>{el}{(i !== props.data.topLevelDomain.length - 1) ? ', ' : ''}</span>
+      })
+    }
+
+    const getLanguages = () => {
+      return props.data.languages.map((el, i) => {
+        return <span key={i+el.name}>{el.name}{(i !== props.data.languages.length - 1) ? ', ' : ''}</span>
+      })
+    }
+
+    const getBorderCountries = () => {
+      const borderCountries =  props.data.borders.map((code, i) => {
+        if (props.countryCodesObj[`${code}`]){
+            return <button key={i+code} className={`borderBtn ${props.toggleViewBtn}`} onClick={()=> {
+              props.getData('name/' + props.countryCodesObj[`${code}`])
+              setShowModal(false)
+            }}>{props.countryCodesObj[`${code}`]}</button>
+        }
+      })
+      return borderCountries
+    }
+
 
   return(
-    <div>
+    <>
 
     <div onClick={() => {
                           setShowModal(true)
@@ -73,7 +75,7 @@ const getBorderCountries = () => {
 
                 <div className='viewLeftCol'>
 
-                        <div className='imgContainer'><img src={props.data.flag} alt='flag'/></div>
+                        <div className='imgContainer'><img className={`viewPageFlag ${boxShadow}`} src={props.data.flag} alt='flag'/></div>
                 </div>
 
                 <div className='viewRightCol'>
@@ -105,7 +107,7 @@ const getBorderCountries = () => {
           </div>
       </div>
     </div>
-    </div>
+    </>
   )
 }
 

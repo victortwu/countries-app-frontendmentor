@@ -25,14 +25,18 @@ const toggleHeader = darkMode ? 'darkHeader' : 'lightHeader'
 const toggleViewPage = darkMode ? 'viewCountryCnt darkModeViewPage' : 'viewCountryCnt lightModeViewPage'
 const toggleViewBtn = darkMode ? 'darkBtn' : 'lightBtn'
 
-
+const controller = new AbortController()
+const signal = controller.signal
 
 const getData = (query) => {
   let names
   let codeHash
-  fetch(baseURL + query)
+  fetch(baseURL + query, {signal})
   .then(res => {
-    return res.json()
+
+      return res.json()
+  
+
   })
   .then(json => {
 
@@ -99,7 +103,7 @@ useEffect(() => {
 
                 {
                   data.map((country, i) => {
-                    
+
                     return <Card
                     key={i + country.name}
                     data={country}

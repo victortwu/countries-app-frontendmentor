@@ -22,49 +22,52 @@ const [data, setData] = useState([])
 const toggleTheme = darkMode ? 'darkMode' : 'lightMode'
 const toggleCard = darkMode ? 'darkCard' : 'lightCard'
 const toggleHeader = darkMode ? 'darkHeader' : 'lightHeader'
-const toggleViewPage = darkMode ? 'viewCountryCnt darkModeViewPage' : 'viewCountryCnt lightModeViewPage'
 const toggleViewBtn = darkMode ? 'darkBtn' : 'lightBtn'
 
-const controller = new AbortController()
-const signal = controller.signal
+
+const handleError = (res) => {
+  if (!res.ok) {
+    alert('Not a valid query')
+    throw Error(res.statusText)
+  }
+  return res
+}
+
 
 const getData = (query) => {
+
   let names
   let codeHash
-  fetch(baseURL + query, {signal})
+
+  fetch(baseURL + query)
+  .then(handleError)
   .then(res => {
-
       return res.json()
-  
-
   })
   .then(json => {
 
-    setData(json)
+      setData(json)
 
-    if ( query === 'all' ) {
-      // https://stackoverflow.com/questions/42974735/create-object-from-array/42974762
-      // great tip on creating an object from this array - notice the parentheses enclosing the curlies
-      codeHash = json.reduce((country, curr) => ({
-        ...country, [curr.cioc]: curr.name
-      }), {})
+      if ( query === 'all' ) {
+        // https://stackoverflow.com/questions/42974735/create-object-from-array/42974762
+        // great tip on creating an object from this array - notice the parentheses enclosing the curlies
+        codeHash = json.reduce((country, curr) => ({
+          ...country, [curr.cioc]: curr.name
+        }), {})
 
-      names = json.map(country => {
-        return country.name
-      })
-      setCountryCodesObj(codeHash)
-      setCountryNames(names)
-    }
-
-
-  })
-  .catch(err => {console.error(err)})
+        names = json.map(country => {
+          return country.name
+        })
+        setCountryCodesObj(codeHash)
+        setCountryNames(names)
+      }
+    })
+    .catch(err => {console.error(err)})
 }
 
 
 useEffect(() => {
   getData('all')
-
 }, [])
 
 
@@ -108,7 +111,7 @@ useEffect(() => {
                     key={i + country.name}
                     data={country}
                     countryCodesObj={countryCodesObj}
-                    toggleViewPage={toggleViewPage}
+
                     toggleViewBtn={toggleViewBtn}
                     toggleCard={toggleCard}
                     darkMode={darkMode}

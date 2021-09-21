@@ -5,6 +5,7 @@ const Card = (props) => {
 
 const [showModal, setShowModal] = useState(false)
 const boxShadow = props.darkMode ? 'darkFlagShadow' : 'lightFlagShadow'
+const viewPageTheme = props.darkMode ? 'darkModeViewPage' : 'lightModeViewPage'
 const bold600 = {fontWeight: '600'}
 const toggleModalClass = showModal ? 'show' : 'hide'
 
@@ -62,7 +63,7 @@ const toggleModalClass = showModal ? 'show' : 'hide'
 
     <div className={toggleModalClass}>
 
-      <div className={props.toggleViewPage}>
+      <div className={`viewCountryCnt ${viewPageTheme}`}>
               <div className='btnContainer'>
                   <button
                       className={`backBtn ${props.toggleViewBtn}`}

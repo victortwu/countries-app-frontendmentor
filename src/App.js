@@ -9,8 +9,8 @@ import './App.css';
 
 const App = () => {
 
-const baseURL = 'https://restcountries.eu/rest/v2/'
-
+// const baseURL = 'https://restcountries.eu/rest/v2/'
+const baseURL = 'https://restcountries.com/v2/'
 
 const [darkMode, setDarkMode] = useState(false)
 
@@ -26,6 +26,7 @@ const toggleViewBtn = darkMode ? 'darkBtn' : 'lightBtn'
 
 
 const handleError = (res) => {
+
   if (!res.ok) {
     alert('Not a valid query')
     throw Error(res.statusText)
@@ -40,6 +41,7 @@ const getData = (query) => {
   let codeHash
 
   fetch(baseURL + query)
+
   .then(handleError)
   .then(res => {
       return res.json()
@@ -52,7 +54,7 @@ const getData = (query) => {
         // https://stackoverflow.com/questions/42974735/create-object-from-array/42974762
         // great tip on creating an object from this array - notice the parentheses enclosing the curlies
         codeHash = json.reduce((country, curr) => ({
-          ...country, [curr.cioc]: curr.name
+          ...country, [curr.alpha3Code]: curr.name
         }), {})
 
         names = json.map(country => {
@@ -100,6 +102,7 @@ useEffect(() => {
                     getData={getData}
                     darkMode={darkMode}
                 />
+
 
             </div>
               <div className='cardsContainer'>

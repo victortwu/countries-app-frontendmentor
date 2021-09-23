@@ -23,7 +23,7 @@ return(
             regions.map((region, i) => {
               return <span key={i + region} onClick={() =>
                 {
-                    props.getData(`region/${region}`)
+                    props.getData(`continent/${region}`)
                     setDropdown(!dropdown)
                 }
               }>{region}</span>

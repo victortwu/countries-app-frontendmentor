@@ -72,7 +72,7 @@ useEffect(() => {
   getData('all')
 }, [])
 
-
+console.log(data)
   return (
     <main className={toggleTheme}>
 
@@ -113,6 +113,7 @@ useEffect(() => {
                     return <Card
                     key={i + country.name}
                     data={country}
+                    currencies={country.currencies}
                     countryCodesObj={countryCodesObj}
 
                     toggleViewBtn={toggleViewBtn}

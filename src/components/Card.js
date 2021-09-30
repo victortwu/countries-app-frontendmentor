@@ -41,6 +41,8 @@ const toggleModalClass = showModal ? 'show' : 'hide'
     // }
 
 
+// console.log(props.data.borders)
+
   return(
     <>
 
@@ -49,7 +51,7 @@ const toggleModalClass = showModal ? 'show' : 'hide'
                           window.scrollTo(0,0)
                       }} className={props.toggleCard}>
       <div className='cardDiv'>
-        <img src={props.data.flags[0]} alt={props.data.name}/>
+        <img src={props.data.flag} alt={props.data.name}/>
         <div className='cardContent'>
             <h4 >{props.data.name}</h4>
             <p><span style={bold600}>Population: </span><span>{props.data.population}</span></p>

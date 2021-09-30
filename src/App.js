@@ -113,7 +113,7 @@ console.log(data)
                     return <Card
                     key={i + country.name}
                     data={country}
-                    currencies={country.currencies}
+        
                     countryCodesObj={countryCodesObj}
 
                     toggleViewBtn={toggleViewBtn}

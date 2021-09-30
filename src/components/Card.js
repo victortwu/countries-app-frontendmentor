@@ -1,9 +1,11 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 const Card = (props) => {
 
 
 const [showModal, setShowModal] = useState(false)
+const [borders, setBorders] = useState([])
+
 const boxShadow = props.darkMode ? 'darkFlagShadow' : 'lightFlagShadow'
 const viewPageTheme = props.darkMode ? 'darkModeViewPage' : 'lightModeViewPage'
 const bold600 = {fontWeight: '600'}
@@ -40,8 +42,31 @@ const toggleModalClass = showModal ? 'show' : 'hide'
     //   return borderCountries
     // }
 
+    const getBorderCountries = () => {
+      const borderCountries =  borders.map((code, i) => {
 
-// console.log(props.data.borders)
+        if (props.countryCodesObj[`${code}`]){
+            // return <button key={i+code} className={`borderBtn ${props.toggleViewBtn}`} onClick={()=> {
+            //   props.getData('name/' + props.countryCodesObj[`${code}`])
+            //   setShowModal(false)
+            // }}>{props.countryCodesObj[`${code}`]}</button>
+            console.log(props.countryCodesObj[`${code}`])
+
+        }
+        // else {
+        //   console.log('No borders')
+        // }
+
+      })
+
+    }
+
+useEffect(()=> {
+  setBorders(props.data?.borders ?? []) // safe operators, takes care of undefined or null values, thanks guy on stackoverflow
+  getBorderCountries()
+}, [])
+
+console.log(borders)
 
   return(
     <>
@@ -54,7 +79,7 @@ const toggleModalClass = showModal ? 'show' : 'hide'
         <img src={props.data.flag} alt={props.data.name}/>
         <div className='cardContent'>
             <h4 >{props.data.name}</h4>
-            <p><span style={bold600}>Population: </span><span>{props.data.population}</span></p>
+            <p><span style={bold600}>Population: </span><span>{props.data.population.toLocaleString('en-US')}</span></p>
             <p><span style={bold600}>Region: </span><span>{props.data.region}</span></p>
             <p><span style={bold600}>Capital: </span><span>{props.data.capital}</span></p>
 

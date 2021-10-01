@@ -4,13 +4,15 @@ import RegionFilter  from './components/RegionFilter'
 import CountrySearch from './components/CountrySearch'
 import { ReactComponent as DarkIcon } from './assets/Darkmodeicon.svg'
 import { ReactComponent as LightIcon } from './assets/Lightmodeicon.svg'
+import { countriesData } from './data/countries.js'
 
 import './App.css';
 
 const App = () => {
 
 // const baseURL = 'https://restcountries.eu/rest/v2/'
-const baseURL = 'https://restcountries.com/v2/'
+// const baseURL = 'https://restcountries.com/v2/'
+const baseURL = 'https://restcountries.com/v3.1/'
 
 const [darkMode, setDarkMode] = useState(false)
 
@@ -54,11 +56,11 @@ const getData = (query) => {
         // https://stackoverflow.com/questions/42974735/create-object-from-array/42974762
         // great tip on creating an object from this array - notice the parentheses enclosing the curlies
         codeHash = json.reduce((country, curr) => ({
-          ...country, [curr.alpha3Code]: curr.name
+          ...country, [curr.cca3]: curr.name.common
         }), {})
 
         names = json.map(country => {
-          return country.name
+          return country.name.common
         })
         setCountryCodesObj(codeHash)
         setCountryNames(names)
@@ -72,7 +74,7 @@ useEffect(() => {
   getData('all')
 }, [])
 
-console.log(data)
+
   return (
     <main className={toggleTheme}>
 
@@ -113,7 +115,7 @@ console.log(data)
                     return <Card
                     key={i + country.name}
                     data={country}
-        
+
                     countryCodesObj={countryCodesObj}
 
                     toggleViewBtn={toggleViewBtn}

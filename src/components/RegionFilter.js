@@ -4,7 +4,7 @@ const RegionFilter = (props) => {
 
 const [dropdown, setDropdown] = useState(false)
 
-const regions = ['Asia', 'Africa', 'Americas', 'Europe', 'Oceania', 'Polar']
+const regions = ['Asia', 'Africa', 'Americas', 'Europe', 'Oceania']
 
 const toggleClass = props.darkMode ? 'searchDark' : 'searchLight'
 
@@ -23,7 +23,7 @@ return(
             regions.map((region, i) => {
               return <span key={i + region} onClick={() =>
                 {
-                    props.getData(`continent/${region}`)
+                    props.getData(`region/${region}`)
                     setDropdown(!dropdown)
                 }
               }>{region}</span>

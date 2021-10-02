@@ -4,7 +4,7 @@ import RegionFilter  from './components/RegionFilter'
 import CountrySearch from './components/CountrySearch'
 import { ReactComponent as DarkIcon } from './assets/Darkmodeicon.svg'
 import { ReactComponent as LightIcon } from './assets/Lightmodeicon.svg'
-import { countriesData } from './data/countries.js'
+
 
 import './App.css';
 

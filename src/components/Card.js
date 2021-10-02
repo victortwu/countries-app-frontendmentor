@@ -4,11 +4,6 @@ const Card = (props) => {
 
 
 const [showModal, setShowModal] = useState(false)
-const [borders, setBorders] = useState([])
-const [currencies, setCurrencies] = useState([])
-const [languages, setLanguages] = useState([])
-const [domains, setDomains] = useState([])
-
 const boxShadow = props.darkMode ? 'darkFlagShadow' : 'lightFlagShadow'
 const viewPageTheme = props.darkMode ? 'darkModeViewPage' : 'lightModeViewPage'
 const bold600 = {fontWeight: '600'}
@@ -16,6 +11,8 @@ const toggleModalClass = showModal ? 'show' : 'hide'
 
 
     const getCurrencies = () => {
+      const currencies = props.data?.currencies ?? []
+
       let currArr = []
 
       for (const [key, value] of Object.entries(currencies)) {
@@ -30,6 +27,9 @@ const toggleModalClass = showModal ? 'show' : 'hide'
 
 
     const getTopLevelDom = () => {
+
+      const domains = props.data?.tld ?? []
+
       const topLDomains =  domains.map((el, i) => {
         return <span key={i+el}>{el}{(i !== domains.length - 1) ? ', ' : ''}</span>
       })
@@ -38,6 +38,9 @@ const toggleModalClass = showModal ? 'show' : 'hide'
 
 
     const getLanguages = () => {
+
+      const languages = props.data?.languages ?? []
+
       let langArr = []
 
       for(const[key,value] of Object.entries(languages)) {
@@ -53,9 +56,12 @@ const toggleModalClass = showModal ? 'show' : 'hide'
 
 
     const getBorderCountries = () => {
-      if (borders.length === 0) return 'NONE'
-      const borderCountries = borders.map((code, i) => {
 
+      const borders = props.data?.borders ?? []
+
+      if (borders.length === 0) return 'NONE'
+
+      const borderCountries = borders.map((code, i) => {
         if (props.countryCodesObj[`${code}`]){
             return <button key={i+code} className={`borderBtn ${props.toggleViewBtn}`} onClick={()=> {
               props.getData('name/' + props.countryCodesObj[`${code}`])
@@ -67,15 +73,7 @@ const toggleModalClass = showModal ? 'show' : 'hide'
     }
 
 
-useEffect(()=> {
-  setBorders(props.data?.borders ?? []) // safe operators, takes care of undefined or null values, thanks guy on stackoverflow
-  setCurrencies(props.data?.currencies ?? [])
-  setLanguages(props.data?.languages ?? [])
-  setDomains(props.data?.tld ?? [])
-
-}, [])
-
-  return(
+return(
     <>
 
     <div onClick={() => {

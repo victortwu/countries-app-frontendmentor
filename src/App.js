@@ -18,7 +18,7 @@ const [darkMode, setDarkMode] = useState(false)
 
 const [countryCodesObj, setCountryCodesObj] = useState({})
 const [countryNames, setCountryNames] = useState([])
-
+const [loading, setLoading] = useState(true)
 const [data, setData] = useState([])
 
 const toggleTheme = darkMode ? 'darkMode' : 'lightMode'
@@ -38,7 +38,7 @@ const handleError = (res) => {
 
 
 const getData = (query) => {
-
+  setLoading(true)
   let names
   let codeHash
 
@@ -65,6 +65,7 @@ const getData = (query) => {
         setCountryCodesObj(codeHash)
         setCountryNames(names)
       }
+      setLoading(false)
     })
     .catch(err => {console.error(err)})
 }
@@ -107,7 +108,7 @@ useEffect(() => {
 
 
             </div>
-              <div className='cardsContainer'>
+              {loading ? <h3 style={{marginTop: '5rem', textAlign: 'center', color: 'gray'}}>Loading...</h3> : <div className='cardsContainer'>
 
                 {
                   data.map((country, i) => {
@@ -127,7 +128,7 @@ useEffect(() => {
                 }
 
 
-              </div>
+              </div>}
 
         </main>
         <footer></footer>

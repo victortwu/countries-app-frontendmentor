@@ -393,6 +393,11 @@ footer {
 
 /* ================== OTHER STUFF ============== */
 
+@keyframes load {
+  0% {opacity: .5}
+  100% {opacity: 1}
+}
+
 @keyframes quickDrop {
   0% {transform: translateY(-3rem); opacity: 0}
   100% {transform: translateY(0); opacity: 1}
